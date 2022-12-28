@@ -1,10 +1,3 @@
-//
-//  main.swift
-//  1. Two Sum
-//
-//  Created by Артем Чаадаев on 28.12.2022.
-//
-
 import Foundation
 
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
