@@ -1,10 +1,3 @@
-//
-//  main.swift
-//  136. Single Number
-//
-//  Created by Артем Чаадаев on 29.12.2022.
-//
-
 import Foundation
 
 func singleNumber(_ nums: [Int]) -> Int {
