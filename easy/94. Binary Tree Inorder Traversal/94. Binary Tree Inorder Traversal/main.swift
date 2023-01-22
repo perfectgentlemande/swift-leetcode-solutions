@@ -1,4 +1,3 @@
-
 import Foundation
 
 public class TreeNode {
@@ -14,33 +13,24 @@ public class TreeNode {
         
     }
 }
- 
-func preorderTraversal(_ root: TreeNode?) -> [Int] {
+
+func inorderTraversal(_ root: TreeNode?) -> [Int] {
     guard root != nil else {
         return []
     }
     
-    return [root!.val] + preorderTraversal(root!.left) + preorderTraversal(root!.right)
+    return inorderTraversal(root!.left) + [root!.val] + inorderTraversal(root!.right)
 }
 
 var root = TreeNode(1)
-root.left = TreeNode(2)
-root.left!.left = TreeNode(4)
-root.right = TreeNode(3)
-root.right!.left = TreeNode(5)
-root.right!.right = TreeNode(6)
-var output = preorderTraversal(root)
-print(output)
-
-root = TreeNode(1)
 root.right = TreeNode(2)
 root.right!.left = TreeNode(3)
-output = preorderTraversal(root)
+var output = inorderTraversal(root)
 print(output)
 
-output = preorderTraversal(nil)
+output = inorderTraversal(nil)
 print(output)
 
 root = TreeNode(1)
-output = preorderTraversal(root)
+output = inorderTraversal(root)
 print(output)
