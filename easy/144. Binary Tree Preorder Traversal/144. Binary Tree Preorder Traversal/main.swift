@@ -23,6 +23,72 @@ func preorderTraversal(_ root: TreeNode?) -> [Int] {
     return [root!.val] + preorderTraversal(root!.left) + preorderTraversal(root!.right)
 }
 
+struct Stack {
+    private var items: [TreeNode] = []
+    
+    mutating func pop() -> TreeNode {
+        return items.removeFirst()
+    }
+    
+    mutating func push(_ item: TreeNode) {
+        items.insert(item, at: 0)
+    }
+    
+    func isEmpty() -> Bool {
+        return items.count == 0
+    }
+}
+
+// func preorderTraversalIterative(root *TreeNode) []int {
+// 	res := make([]int, 0)
+// 	s := make(Stack, 0)
+
+// 	if root != nil {
+// 		s.Push(*root)
+// 	}
+
+// 	var cur TreeNode
+
+// 	for !s.IsEmpty() {
+// 		cur, _ = s.Pop()
+
+// 		res = append(res, cur.Val)
+// 		if cur.Right != nil {
+// 			s.Push(*cur.Right)
+// 		}
+// 		if cur.Left != nil {
+// 			s.Push(*cur.Left)
+// 		}
+// 	}
+
+// 	return res
+// }
+
+func preorderTraversalIterative(_ root: TreeNode?) -> [Int] {
+    var res = [Int]()
+    var s = Stack()
+
+    if root != nil {
+        s.push(root!)
+    }
+
+    var cur = TreeNode()
+
+    while !s.isEmpty() {
+        cur = s.pop()
+
+        res.append(cur.val)
+        if cur.right != nil {
+            s.push(cur.right!)
+        }
+         if cur.left != nil {
+            s.push(cur.left!)
+        }
+    }
+
+    return res
+}
+
 var root = TreeNode(1)
 root.left = TreeNode(2)
 root.left!.left = TreeNode(4)
