@@ -39,7 +39,27 @@ struct Stack {
 }
 
 func postorderTraversalIterative(_ root: TreeNode?) -> [Int] {
-    
+    var res = [Int]()
+    var s = Stack()
+
+    if root == nil {
+        return res
+    }
+    s.push(root!)
+
+    while !s.isEmpty() {
+        var node = s.pop()
+        res.append(node.val)
+
+		if node.left != nil {
+			s.push(node.left!)
+		}
+		if node.right != nil {
+			s.push(node.right!)
+		}
+    }
+
+    return res.reversed()
 }
 
 var root = TreeNode(1)
