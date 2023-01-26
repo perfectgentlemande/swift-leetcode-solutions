@@ -22,6 +22,42 @@ func inorderTraversal(_ root: TreeNode?) -> [Int] {
     return inorderTraversal(root!.left) + [root!.val] + inorderTraversal(root!.right)
 }
 
+struct Stack {
+    private var items: [TreeNode] = []
+    
+    mutating func pop() -> TreeNode {
+        return items.removeFirst()
+    }
+    
+    mutating func push(_ item: TreeNode) {
+        items.insert(item, at: 0)
+    }
+    
+    func isEmpty() -> Bool {
+        return items.count == 0
+    }
+}
+
+func inorderTraversalIterative(_ root: TreeNode?) -> [Int] {
+    var res = [Int]()
+    var s = Stack()
+
+    var cur = root
+    while cur != nil || !s.isEmpty() {
+        while cur != nil {
+            s.push(cur!)
+            cur = cur!.left
+        }
+
+        var newCur = s.pop()
+        res.append(newCur.val)
+        cur = newCur.right
+    }
+
+    return res
+}
+
+
 var root = TreeNode(1)
 root.right = TreeNode(2)
 root.right!.left = TreeNode(3)
