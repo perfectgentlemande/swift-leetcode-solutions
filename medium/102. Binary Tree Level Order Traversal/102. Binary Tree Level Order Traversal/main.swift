@@ -81,5 +81,30 @@ func levelOrder(_ root: TreeNode?) -> [[Int]] {
     return res
 }
 
+func traverse(_ node: TreeNode, _ level: Int, _ res: inout [[Int]]) {
+	if res.count == level {
+		res.append([Int]())
+	}
+    
+	if node.left != nil {
+		traverse(node.left!, level+1, res)
+	}
+	if node.right != nil {
+		traverse(node.right!, level+1, res)
+	}
+}
+
+func levelOrder(_ root: TreeNode?) -> [[Int]] {
+    if root == nil {
+        return []
+    }
+    
+    var res = [[Int]]()
+	traverse(root!, 0, res)
+
+	return res
+}
+
+
 print("Hello, World!")
 
