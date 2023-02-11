@@ -83,6 +83,3 @@ func maxDepthIterative(_ root: TreeNode?) -> Int {
     
     return res
 }
-
-print("Hello, World!")
-
