@@ -13,18 +13,17 @@ public class TreeNode {
     }
 }
 
-func helper(_ inLeft: Int, _ inRight: Int, _ postorder: inout [Int], _ postIdx: inout Int, _ idxMap: inout [Int: Int])  -> TreeNode? {
+func helper(_ inLeft: Int, _ inRight: Int, _ postorder: [Int], _ postIdx: inout Int, _ idxMap: [Int: Int])  -> TreeNode? {
     if inLeft > inRight {
         return nil
     }
 
     var rootVal = postorder[postIdx]
     var root = TreeNode(rootVal)
-    var index = idxMap[rootVal]!
     postIdx = postIdx - 1
 
-    root.right = helper(index+1, inRight, &postorder, &postIdx, &idxMap)
-    root.left = helper(inLeft, index-1, &postorder, &postIdx, &idxMap)
+    root.right = helper(idxMap[rootVal]!+1, inRight, postorder, &postIdx, idxMap)
+    root.left = helper(inLeft, idxMap[rootVal]!-1, postorder, &postIdx, idxMap)
 
     return root
 }
@@ -36,12 +35,11 @@ func buildTree(_ inorder: [Int], _ postorder: [Int]) -> TreeNode? {
     var idx = 0
     var idxMap: [Int: Int] = [:]
 
-    for val in inorder {
-        idxMap[val] = idx
-        idx += 1
+     for (index, element) in inorder.enumerated() {
+        idxMap[element] = index
     }
 
-    return helper(0, inorder.count - 1, &postorderVar, &postIdx, &idxMap)
+    return helper(0, inorder.count - 1, postorderVar, &postIdx, idxMap)
 }
 
 print("Hello, World!")
