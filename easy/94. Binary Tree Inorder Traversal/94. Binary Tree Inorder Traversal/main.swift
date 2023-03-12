@@ -57,6 +57,70 @@ func inorderTraversalIterative(_ root: TreeNode?) -> [Int] {
     return res
 }
 
+class StackNode {
+    public var val: TreeNode
+    public var next: StackNode?
+    public init() { self.val = TreeNode(0); self.next = nil; }
+    public init(_ val: TreeNode) { self.val = val; self.next = nil; }
+    public init(_ val: TreeNode, _ next: StackNode?) { self.val = val; self.next = next; }
+}
+
+class Stack {
+    var root: StackNode?
+
+    init() {
+        root = nil
+    }
+    
+    func push(_ val: TreeNode) {
+        var nextRoot = self.root
+
+        self.root = StackNode(val, nextRoot)
+    }
+    
+    func pop() -> TreeNode {
+        if self.root == nil {
+            return TreeNode()
+        }
+
+        var val = self.root!.val
+        self.root = self.root!.next
+
+        return val
+    }
+    
+    func top() -> TreeNode {
+        if self.root == nil {
+            return TreeNode()
+        }
+
+        return self.root!.val
+    }
+    
+    func isEmpty() -> Bool {
+        return self.root == nil
+    }
+}
+
+func inorderTraversalIterativeWithLinkedList(_ root: TreeNode?) -> [Int] {
+    var res = [Int]()
+    var s = Stack()
+
+    var cur = root
+    while cur != nil || !s.isEmpty() {
+        while cur != nil {
+            s.push(cur!)
+            cur = cur!.left
+        }
+
+        var newCur = s.pop()
+        res.append(newCur.val)
+        cur = newCur.right
+    }
+
+    return res
+}
+
 
 var root = TreeNode(1)
 root.right = TreeNode(2)
