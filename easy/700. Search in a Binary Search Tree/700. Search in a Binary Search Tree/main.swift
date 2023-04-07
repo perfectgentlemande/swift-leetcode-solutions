@@ -30,3 +30,20 @@ func searchBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
 
     return nil
 }
+
+func searchBSTRecursive(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+    if root == nil {
+        return nil
+    }
+    if root!.val == val {
+        return root
+    }
+
+    if val > root!.val {
+        return searchBSTRecursive(root!.right, val)
+    } else if val < root!.val {
+        return searchBSTRecursive(root!.left, val)
+    }
+
+    return nil
+}
