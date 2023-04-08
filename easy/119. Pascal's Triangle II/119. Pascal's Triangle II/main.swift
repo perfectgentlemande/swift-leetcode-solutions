@@ -19,3 +19,21 @@ func getRow(_ rowIndex: Int) -> [Int] {
 
     return res[rowIndex]
 }
+
+func getNum(_ i: Int, _ j: Int) -> Int {
+	if j == 0 || i == j {
+		return 1
+	}
+
+	return getNum(i-1, j-1) + getNum(i-1, j)
+}
+
+func getRowRecursive(_ rowIndex: Int) -> [Int] {
+    var res = [Int]()
+
+    for i in 0...rowIndex {
+        res.append(getNum(rowIndex, i))
+    }
+
+    return res
+}
