@@ -37,3 +37,29 @@ func getRowRecursive(_ rowIndex: Int) -> [Int] {
 
     return res
 }
+
+func getRowRecursiveBetter(_ rowIndex: Int) -> [Int] {
+    if rowIndex == 0 {
+        return [1]
+    }
+
+    var res = [Int]()
+    var prevRow = getRowRecursiveBetter(rowIndex-1)
+    for i in 0...rowIndex {
+        res.append(1)
+        var left = 0
+        var right = 0
+
+        if i > 0 {
+			left = prevRow[i-1]
+		}
+
+		if i < rowIndex {
+			right = prevRow[i]
+		}
+
+		res[i] = left + right
+    }
+
+    return res
+}
