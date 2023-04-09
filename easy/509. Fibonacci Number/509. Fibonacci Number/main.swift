@@ -30,7 +30,6 @@ func fibWithMemoization(_ n: Int) -> Int {
 	return fibResults[n]!
 }
 
-
 func fibIterative(_ n: Int) -> Int {
 	if n == 0 {
 		return 0
