@@ -29,3 +29,25 @@ func fibWithMemoization(_ n: Int) -> Int {
 
 	return fibResults[n]!
 }
+
+
+func fibIterative(_ n: Int) -> Int {
+	if n == 0 {
+		return 0
+	}
+	if n == 1 {
+		return 1
+	}
+
+	var previous = 1
+	var previousPrevious = 0
+	var current = 0
+
+	for i in 2 ... n {
+		current = previous + previousPrevious
+		previousPrevious = previous
+		previous = current
+	}
+
+	return current
+}
