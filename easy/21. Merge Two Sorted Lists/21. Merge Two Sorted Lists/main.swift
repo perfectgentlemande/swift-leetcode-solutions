@@ -39,3 +39,27 @@ func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
     
     return dummy!.next
 }
+
+
+
+func mergeTwoListsRecursive(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+    if list1 == nil && list2 == nil {
+        return nil
+    }
+    if list1 == nil {
+        return list2
+    }
+    if list2 == nil {
+        return list1
+    }
+
+    if list1!.val < list2!.val {
+        var tmp = list1!.next
+        list1!.next = mergeTwoListsRecursive(tmp, list2)
+        return list1
+    } else {
+        var tmp = list2!.next
+        list2!.next = mergeTwoListsRecursive(tmp, list1)
+        return list2
+    }
+}
